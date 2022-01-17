@@ -35,19 +35,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => ThemeProvider()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: developerName,
-        theme: ThemeStyles.themeData(_themeProvider.lightTheme, context),
-        initialRoute: "/",
-        routes: {
-          "/": (context) => const MainPage(),
-          "/workTogether": (context) => Container(),
-          "/details": (context) => Container()
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, ThemeProvider themeProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: developerName,
+            theme: ThemeStyles.themeData(themeProvider.lightTheme, context),
+            initialRoute: "/",
+            routes: {
+              "/": (context) => const MainPage(),
+              "/workTogether": (context) => Container(),
+              "/details": (context) => Container()
+            },
+          );
         },
       ),
     );
