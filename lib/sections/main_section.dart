@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/animations/entrance_fader.dart';
 import 'package:portfolio/providers/theme_provider.dart';
+import 'package:portfolio/sections/home/home.dart';
 import 'package:portfolio/widgets/arrow_on_top.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
@@ -31,6 +32,31 @@ class _MainPageState extends State<MainPage> {
     "CONTACT"
   ];
 
+  Widget sectionWidget(int i) {
+    const sections = [
+      HomePage()
+    ];
+
+    // if (i == 0) {
+    //   return HomePage();
+    // } else if (i == 1) {
+    //   return About();
+    // } else if (i == 2) {
+    //   return Services();
+    // } else if (i == 3) {
+    //   return Portfolio();
+    // } else if (i == 4) {
+    //   return Contact();
+    // } else if (i == 5) {
+    //   return Footer();
+    // } else {
+    //   return Container();
+    // }
+
+    return i < sections.length ? sections[i] : Container();
+
+  }
+
   final List<IconData> _sectionsIcons = [
     Icons.home,
     Icons.person,
@@ -54,25 +80,6 @@ class _MainPageState extends State<MainPage> {
       duration: const Duration(seconds: 1),
       curve: Curves.easeInOut,
     );
-  }
-
-  Widget sectionWidget(int i) {
-    // if (i == 0) {
-    //   return HomePage();
-    // } else if (i == 1) {
-    //   return About();
-    // } else if (i == 2) {
-    //   return Services();
-    // } else if (i == 3) {
-    //   return Portfolio();
-    // } else if (i == 4) {
-    //   return Contact();
-    // } else if (i == 5) {
-    //   return Footer();
-    // } else {
-    //   return Container();
-    // }
-    return Container();
   }
 
   @override
