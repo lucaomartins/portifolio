@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           bool useVerticalLayout = constraints.maxWidth < 400.0;
-          print("teste");
           return Flex(
             children: const [
               Text("Hello"),

@@ -117,11 +117,12 @@ class _MainPageState extends State<MainPage> {
     final _themeProv = Provider.of<ThemeProvider>(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: _themeProv.lightTheme ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: MediaQuery.of(context).size.width < 760
           ? AppBar(
               iconTheme: IconThemeData(
-                  color: _themeProv.lightTheme ? Colors.black : Colors.white),
+                  color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
+              ),
               elevation: 0,
               backgroundColor: Colors.transparent,
               actions: [
@@ -173,8 +174,7 @@ class _MainPageState extends State<MainPage> {
                 child: Text(
                   childText,
                   style: TextStyle(
-                    color:
-                        themeProvider.lightTheme ? Colors.black : Colors.white,
+                    color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
                   ),
                 ),
               ),
@@ -207,7 +207,7 @@ class _MainPageState extends State<MainPage> {
   PreferredSizeWidget _appBarTabDesktop(ThemeProvider _themeProv) {
     return AppBar(
       elevation: 0.0,
-      backgroundColor: _themeProv.lightTheme ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: MediaQuery.of(context).size.width < 780
           ? EntranceFader(
               duration: const Duration(milliseconds: 250),
@@ -248,7 +248,7 @@ class _MainPageState extends State<MainPage> {
               child: Text(
                 "RESUME",
                 style: GoogleFonts.montserrat(
-                  color: _themeProv.lightTheme ? Colors.black : Colors.white,
+                  color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
                   fontWeight: FontWeight.w300,
                 ),
               ),
@@ -296,7 +296,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 title: Text("Dark Mode",
                     style: TextStyle(
-                        color: theme.lightTheme ? Colors.black : Colors.white)),
+                        color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,)),
                 trailing: Switch(
                   inactiveTrackColor: Colors.grey,
                   value: !theme.lightTheme,
@@ -330,7 +330,7 @@ class _MainPageState extends State<MainPage> {
                       "RESUME",
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w300,
-                        color: theme.lightTheme ? Colors.black : Colors.white,
+                        color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
                       ),
                     ),
                   ),
