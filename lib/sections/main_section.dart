@@ -5,6 +5,7 @@ import 'package:portfolio/animations/entrance_fader.dart';
 import 'package:portfolio/providers/theme_provider.dart';
 import 'package:portfolio/sections/home/home.dart';
 import 'package:portfolio/widgets/arrow_on_top.dart';
+import 'package:portfolio/widgets/section_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
 import '../utils.dart';
@@ -23,47 +24,8 @@ class _MainPageState extends State<MainPage> {
   bool _isScrollingDown = false;
   ScrollController _scrollController = ScrollController();
 
-  final List<String> _sectionsName = [
-    "HOME",
-    "ABOUT",
-    "RESUME",
-    "SERVICES",
-    "PROJECTS",
-    "CONTACT"
-  ];
-
-  Widget sectionWidget(int i) {
-    const sections = [
-      HomePage()
-    ];
-
-    // if (i == 0) {
-    //   return HomePage();
-    // } else if (i == 1) {
-    //   return About();
-    // } else if (i == 2) {
-    //   return Services();
-    // } else if (i == 3) {
-    //   return Portfolio();
-    // } else if (i == 4) {
-    //   return Contact();
-    // } else if (i == 5) {
-    //   return Footer();
-    // } else {
-    //   return Container();
-    // }
-
-    return i < sections.length ? sections[i] : Container();
-
-  }
-
-  final List<IconData> _sectionsIcons = [
-    Icons.home,
-    Icons.person,
-    Icons.settings,
-    Icons.build,
-    Icons.class_,
-    Icons.phone,
+  final List<SectionWidget> _sections = const [
+    HomePage()
   ];
 
   void _scroll(int i) {
@@ -140,8 +102,8 @@ class _MainPageState extends State<MainPage> {
         children: [
           SectionsBody(
             scrollController: _scrollController,
-            sectionsLength: _sectionsIcons.length,
-            sectionWidget: sectionWidget,
+            sectionsLength: _sections.length,
+            sectionWidget: (i) => _sections[i],
           ),
           _isScrollingDown
               ? Positioned(
@@ -225,8 +187,8 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
       actions: [
-        for (int i = 0; i < _sectionsName.length; i++)
-          _appBarActions(_sectionsName[i], i, _sectionsIcons[i], _themeProv),
+        for (int i = 0; i < _sections.length; i++)
+          _appBarActions(_sections[i].name, i, _sections[i].icon, _themeProv),
         EntranceFader(
           offset: const Offset(0, -10),
           delay: const Duration(milliseconds: 100),
@@ -309,8 +271,8 @@ class _MainPageState extends State<MainPage> {
               Divider(
                 color: theme.lightTheme ? Colors.grey[200] : Colors.white,
               ),
-              for (int i = 0; i < _sectionsName.length; i++)
-                _appBarActions(_sectionsName[i], i, _sectionsIcons[i], theme),
+              for (int i = 0; i < _sections.length; i++)
+                _appBarActions(_sections[i].name, i, _sections[i].icon, theme),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: MaterialButton(

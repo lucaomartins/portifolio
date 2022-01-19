@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, ThemeProvider themeProvider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: developerName,
+            title: developerCompleteName,
             theme: ThemeStyles.themeData(themeProvider.lightTheme, context),
             initialRoute: "/",
             routes: {

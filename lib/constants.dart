@@ -1,9 +1,4 @@
-
-// Colors
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 const Color primaryColor = Color(0xff50fa7b);
 const Color secondaryColor = Color(0xffff79c6);
@@ -18,4 +13,6 @@ const Color foregroundLightColor = Colors.black;
 const Color backgroundLightColor = Colors.white;
 
 
-const developerName = "Lucas Martins";
+const developerName = "Lucas";
+const developerLastname = "Martins";
+const developerCompleteName = "$developerName $developerLastname";

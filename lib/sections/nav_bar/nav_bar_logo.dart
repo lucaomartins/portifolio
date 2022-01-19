@@ -24,7 +24,7 @@ class NavBarLogo extends StatelessWidget {
             ),
           ),
           Text(
-            developerName,
+            developerCompleteName,
             style: TextStyle(
               fontFamily: "Agustina",
               fontSize: height ?? 20,
