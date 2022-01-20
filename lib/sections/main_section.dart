@@ -3,7 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/animations/entrance_fader.dart';
 import 'package:portfolio/providers/theme_provider.dart';
+import 'package:portfolio/sections/home/home.dart';
 import 'package:portfolio/widgets/arrow_on_top.dart';
+import 'package:portfolio/widgets/section_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
 import '../utils.dart';
@@ -22,22 +24,8 @@ class _MainPageState extends State<MainPage> {
   bool _isScrollingDown = false;
   ScrollController _scrollController = ScrollController();
 
-  final List<String> _sectionsName = [
-    "HOME",
-    "ABOUT",
-    "RESUME",
-    "SERVICES",
-    "PROJECTS",
-    "CONTACT"
-  ];
-
-  final List<IconData> _sectionsIcons = [
-    Icons.home,
-    Icons.person,
-    Icons.settings,
-    Icons.build,
-    Icons.class_,
-    Icons.phone,
+  final List<SectionWidget> _sections = const [
+    HomePage()
   ];
 
   void _scroll(int i) {
@@ -54,25 +42,6 @@ class _MainPageState extends State<MainPage> {
       duration: const Duration(seconds: 1),
       curve: Curves.easeInOut,
     );
-  }
-
-  Widget sectionWidget(int i) {
-    // if (i == 0) {
-    //   return HomePage();
-    // } else if (i == 1) {
-    //   return About();
-    // } else if (i == 2) {
-    //   return Services();
-    // } else if (i == 3) {
-    //   return Portfolio();
-    // } else if (i == 4) {
-    //   return Contact();
-    // } else if (i == 5) {
-    //   return Footer();
-    // } else {
-    //   return Container();
-    // }
-    return Container();
   }
 
   @override
@@ -110,15 +79,16 @@ class _MainPageState extends State<MainPage> {
     final _themeProv = Provider.of<ThemeProvider>(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: _themeProv.lightTheme ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: MediaQuery.of(context).size.width < 760
           ? AppBar(
               iconTheme: IconThemeData(
-                  color: _themeProv.lightTheme ? Colors.black : Colors.white),
+                  color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
+              ),
               elevation: 0,
               backgroundColor: Colors.transparent,
               actions: [
-                NavBarLogo(),
+                const NavBarLogo(),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.05,
                 )
@@ -132,8 +102,8 @@ class _MainPageState extends State<MainPage> {
         children: [
           SectionsBody(
             scrollController: _scrollController,
-            sectionsLength: _sectionsIcons.length,
-            sectionWidget: sectionWidget,
+            sectionsLength: _sections.length,
+            sectionWidget: (i) => _sections[i],
           ),
           _isScrollingDown
               ? Positioned(
@@ -165,10 +135,7 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () => _scroll(index),
                 child: Text(
                   childText,
-                  style: TextStyle(
-                    color:
-                        themeProvider.lightTheme ? Colors.black : Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
             ),
@@ -200,12 +167,12 @@ class _MainPageState extends State<MainPage> {
   PreferredSizeWidget _appBarTabDesktop(ThemeProvider _themeProv) {
     return AppBar(
       elevation: 0.0,
-      backgroundColor: _themeProv.lightTheme ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: MediaQuery.of(context).size.width < 780
-          ? EntranceFader(
-              duration: const Duration(milliseconds: 250),
-              offset: const Offset(0, -10),
-              delay: const Duration(seconds: 3),
+          ? const EntranceFader(
+              duration: Duration(milliseconds: 250),
+              offset: Offset(0, -10),
+              delay: Duration(seconds: 3),
               child: NavBarLogo(
                 height: 20.0,
               ))
@@ -218,8 +185,8 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
       actions: [
-        for (int i = 0; i < _sectionsName.length; i++)
-          _appBarActions(_sectionsName[i], i, _sectionsIcons[i], _themeProv),
+        for (int i = 0; i < _sections.length; i++)
+          _appBarActions(_sections[i].name, i, _sections[i].icon, _themeProv),
         EntranceFader(
           offset: const Offset(0, -10),
           delay: const Duration(milliseconds: 100),
@@ -240,10 +207,7 @@ class _MainPageState extends State<MainPage> {
               },
               child: Text(
                 "RESUME",
-                style: GoogleFonts.montserrat(
-                  color: _themeProv.lightTheme ? Colors.black : Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
           ),
@@ -274,9 +238,9 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                 child: NavBarLogo(
-                  height: 28,
+                  height: 20,
                 ),
               ),
               Divider(
@@ -289,7 +253,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 title: Text("Dark Mode",
                     style: TextStyle(
-                        color: theme.lightTheme ? Colors.black : Colors.white)),
+                        color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,)),
                 trailing: Switch(
                   inactiveTrackColor: Colors.grey,
                   value: !theme.lightTheme,
@@ -302,8 +266,8 @@ class _MainPageState extends State<MainPage> {
               Divider(
                 color: theme.lightTheme ? Colors.grey[200] : Colors.white,
               ),
-              for (int i = 0; i < _sectionsName.length; i++)
-                _appBarActions(_sectionsName[i], i, _sectionsIcons[i], theme),
+              for (int i = 0; i < _sections.length; i++)
+                _appBarActions(_sections[i].name, i, _sections[i].icon, theme),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: MaterialButton(
@@ -321,10 +285,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     title: Text(
                       "RESUME",
-                      style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w300,
-                        color: theme.lightTheme ? Colors.black : Colors.white,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                 ),
