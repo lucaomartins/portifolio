@@ -240,7 +240,7 @@ class _MainPageState extends State<MainPage> {
             children: [
               const Center(
                 child: NavBarLogo(
-                  height: 28,
+                  height: 20,
                 ),
               ),
               Divider(
