@@ -88,7 +88,7 @@ class _MainPageState extends State<MainPage> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               actions: [
-                NavBarLogo(),
+                const NavBarLogo(),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.05,
                 )
@@ -135,9 +135,7 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () => _scroll(index),
                 child: Text(
                   childText,
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
             ),
@@ -171,10 +169,10 @@ class _MainPageState extends State<MainPage> {
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
       title: MediaQuery.of(context).size.width < 780
-          ? EntranceFader(
-              duration: const Duration(milliseconds: 250),
-              offset: const Offset(0, -10),
-              delay: const Duration(seconds: 3),
+          ? const EntranceFader(
+              duration: Duration(milliseconds: 250),
+              offset: Offset(0, -10),
+              delay: Duration(seconds: 3),
               child: NavBarLogo(
                 height: 20.0,
               ))
@@ -209,10 +207,7 @@ class _MainPageState extends State<MainPage> {
               },
               child: Text(
                 "RESUME",
-                style: GoogleFonts.montserrat(
-                  color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
           ),
@@ -243,7 +238,7 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
+              const Center(
                 child: NavBarLogo(
                   height: 28,
                 ),
@@ -290,10 +285,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                     title: Text(
                       "RESUME",
-                      style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w300,
-                        color: Theme.of(context).textTheme.bodyText1?.color ?? Colors.white,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                 ),

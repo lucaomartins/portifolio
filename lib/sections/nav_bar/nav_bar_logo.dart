@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/constants.dart';
-import 'package:portfolio/providers/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 class NavBarLogo extends StatelessWidget {
   final double? height;
-  NavBarLogo({this.height});
+  const NavBarLogo({Key? key, this.height}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _themeProvider = Provider.of<ThemeProvider>(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
           MediaQuery.of(context).size.width < 1100 ? 0.0 : 20.0, 20.0, 0, 0),
@@ -18,24 +16,23 @@ class NavBarLogo extends StatelessWidget {
         children: [
           Text(
             "< ",
-            style: TextStyle(
+            style: GoogleFonts.jetBrainsMono(
               fontSize: height ?? 20,
-              color: _themeProvider.lightTheme ? Colors.black : Colors.white,
+              color: Theme.of(context).textTheme.bodyText1?.color,
             ),
           ),
           Text(
             developerCompleteName,
-            style: TextStyle(
-              fontFamily: "Agustina",
+            style: GoogleFonts.audiowide(
               fontSize: height ?? 20,
-              color: _themeProvider.lightTheme ? Colors.black : Colors.white,
+              color: Theme.of(context).textTheme.bodyText1?.color,
             ),
           ),
           Text(
             MediaQuery.of(context).size.width >= 1000 ? " />\t\t" : " />",
-            style: TextStyle(
+            style: GoogleFonts.jetBrainsMono(
               fontSize: height ?? 20,
-              color: _themeProvider.lightTheme ? Colors.black : Colors.white,
+              color: Theme.of(context).textTheme.bodyText1?.color,
             ),
           )
         ],

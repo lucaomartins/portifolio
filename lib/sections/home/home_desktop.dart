@@ -33,4 +33,9 @@ class HomeDesktop extends BaseHomePage {
   double? getWelcomeFontSize(width, height) {
     return height * 0.03;
   }
+
+  @override
+  double? getNameFontSize(width, height) {
+    return width < 1200 ? height * 0.105 : height * 0.115;
+  }
 }

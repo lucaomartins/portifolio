@@ -36,4 +36,9 @@ class HomeMobile extends BaseHomePage {
   double? getWelcomeFontSize(width, height) {
     return height * 0.025;
   }
+
+  @override
+  double? getNameFontSize(width, height) {
+    return height * 0.055;
+  }
 }

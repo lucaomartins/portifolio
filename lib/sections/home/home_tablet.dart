@@ -39,4 +39,9 @@ class HomeTablet extends BaseHomePage {
   double? getWelcomeFontSize(width, height) {
     return height * 0.03;
   }
+
+  @override
+  double? getNameFontSize(width, height) {
+    return height * 0.07;
+  }
 }
