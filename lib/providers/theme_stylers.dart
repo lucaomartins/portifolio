@@ -12,15 +12,14 @@ class ThemeStyles {
         backgroundColor: backgroundColor,
         highlightColor: highlightColor,
         canvasColor: Colors.white,
-        textTheme: GoogleFonts.nunitoTextTheme().apply(
+        textTheme: GoogleFonts.nunitoTextTheme()
+            .apply(
               bodyColor: foregroundColor,
               displayColor: foregroundColor,
-            ).copyWith(
-          headline1: GoogleFonts.exo2(
-            color: foregroundColor,
-            fontWeight: FontWeight.w600
-          )
-        ),
+            )
+            .copyWith(
+                headline1: GoogleFonts.exo2(
+                    color: foregroundColor, fontWeight: FontWeight.w600)),
         colorScheme: Theme.of(buildContext).colorScheme.copyWith(
               secondary: secondaryColor,
               brightness: Brightness.light,
@@ -32,10 +31,14 @@ class ThemeStyles {
         backgroundColor: backgroundLightColor,
         highlightColor: Colors.black,
         canvasColor: Colors.white,
-        textTheme: Theme.of(buildContext).textTheme.apply(
+        textTheme: GoogleFonts.nunitoTextTheme()
+            .apply(
               bodyColor: foregroundLightColor,
               displayColor: foregroundLightColor,
-            ),
+            )
+            .copyWith(
+                headline1: GoogleFonts.exo2(
+                    color: foregroundLightColor, fontWeight: FontWeight.w600)),
         colorScheme: Theme.of(buildContext).colorScheme.copyWith(
               secondary: Colors.black,
               brightness: Brightness.light,
